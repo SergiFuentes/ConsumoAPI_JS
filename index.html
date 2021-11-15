@@ -62,5 +62,40 @@
                 }
             });
     </script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js">
+        axios
+        .get('https://jsonplaceholder.typicode.com/posts')
+        .then(response => {
+            // Código para manipular la respuesta de la llamada
+            // utilizando el objeto response.data
+            console.log(reponse.data);
+        })
+        .catch(error => {
+            // para el manejo de errores
+            console.log(error);
+        });
+
+        let axiosOptions = {
+            method: 'POST',              // verbo de la llamada que vamos a realizar
+            url: '/users/register',      // la ruta, dentro del API, que vamos a utilizar
+            data: {                      // Data que queremos guardar
+            id:       17,
+            nombre:   'Juan',
+            apellido: 'Del Pueblo',
+            tipo:     'Usuario'
+            }
+            json: true                   // indicando que estamos enviando la 
+                                        // información en formato JSON
+        };
+        
+        axios(axiosOptions)
+        .then( response => { 
+            // nuevamente, la respuesta del servidor se  
+            // encuentra en la variable response
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    </script>
   </body>
 </html>
