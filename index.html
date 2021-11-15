@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css">
+    <title>ConsumoAPI</title>
+  </head>
+  <body>
+    <div id="app">
+        <h2>Quehaceres:</h2>
+        <ol>
+          <li v-for="quehacer in listado">
+            <label>
+              <input type="checkbox"
+                v-on:change="toggle(quehacer)"
+                v-bind:checked="quehacer.finalizado">
+      
+              <del v-if="quehacer.finalizado">
+                {{ quehacer.texto }}
+              </del>
+              <span v-else>
+                {{ quehacer.texto }}
+              </span>
+            </label>
+          </li>
+        </ol>
+        <input type="text" v-model="nuevoQuehacer" >
+        <button type="button" @click="agregarItem()">Agregar</button>
+      </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js">
+            var app = new Vue({
+                el: "#app",
+                data: {
+                    listado: [
+                    { texto: "Levantarme", finalizado: true },
+                    { texto: "Tomar café", finalizado: true },
+                    { texto: "Hacer caca", finalizado: false },
+                    { texto: "Ser grandioso", finalizado: false }
+                    ],
+                    nuevoQuehacer: '',
+                },
+                methods: {
+                    toggle: function(quehacer){
+                        quehacer.finalizado = !quehacer.finalizado
+                    },
+                    agregarItem: function() {
+                        // Verificar que el campo no esté vacío
+                        if ( this.nuevoQuehacer.length == 0 ) {
+                            alert('El campo no puede estar vacío.');
+                            return;
+                        }
+                
+                        this.listado.push({
+                        texto: this.nuevoQuehacer,
+                        finalizado: false
+                        });
+                        
+                        this.nuevoQuehacer = '';
+                    },
+                }
+            });
+    </script>
+  </body>
+</html>
